@@ -14,6 +14,7 @@ class BaseModel:
         self.created_at = datetime.datetime.now().isoformat()
         for key, value in kwargs.items():
             setattr(self, key, value)
+        self.save()
 
     def save(self):
         self.updated_at = datetime.datetime.now().isoformat()
@@ -22,7 +23,7 @@ class BaseModel:
         return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
 
     def to_dict(self):
-        dic = {self.__class__: self.__class__.__name__}
+        dic = {"__class__": self.__class__.__name__}
         for key, value in self.__dict__.items():
             dic.update({key: value})
         return dic
