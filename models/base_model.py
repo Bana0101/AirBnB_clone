@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 """ a basemodel class """
-import datetime, uuid
+
+import datetime
+import uuid
+from models.__init__ import __init__
+
 
 class BaseModel:
     """ the basemodel class """
@@ -23,9 +27,11 @@ class BaseModel:
         return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
 
     def to_dict(self):
-        dic = {"__class__": self.__class__.__name__}
+        dic = {}
+        dic["__class__"] = self.__class__.__name__
         for key, value in self.__dict__.items():
-            if key in ["created_at", "updated_at"] and isinstance(value, datetime.datetime):
+            if (key in ["created_at", "updated_at"]
+                    and isinstance(value, datetime.datetime)):
                 dic[key] = value.isoformat()
             else:
                 dic[key] = value
@@ -37,11 +43,11 @@ class BaseModel:
             ins = cls()
             for key, value in data.items():
                 if key == "__class__":
-                    continue
-                elif key in ["created_at", "updated_at"] and isinstance(value, str):
+                    ins.__class__.__name__ = data["__class__"]
+                elif (key in ["created_at", "updated_at"]
+                        and isinstance(value, str)):
                     value = datetime.datetime.fromisoformat(value)
                 setattr(ins, key, value)
         else:
             ins = cls()
         return ins
-
