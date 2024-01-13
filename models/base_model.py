@@ -5,7 +5,7 @@ import datetime, uuid
 class BaseModel:
     """ the basemodel class """
 
-    id = str(uuid.uuid4())
+    id = None
     created_at = None
     updated_at = None
 
@@ -13,6 +13,7 @@ class BaseModel:
         self.updated_at = datetime.datetime.now().isoformat()
 
     def __init__(self, *args, **kwargs):
+        self.id = str(uuid.uuid4())
         self.created_at = datetime.datetime.now().isoformat()
         self.save()
         for key, value in kwargs.items():
@@ -29,3 +30,18 @@ class BaseModel:
             else:
                 dic[key] = value
         return dic
+
+    @classmethod
+    def from_dict(cls, data):
+        if data:
+            ins = cls()
+            for key, value in data.items():
+                if key == "__class__":
+                    continue
+                elif key in ["created_at", "updated_at"] and isinstance(value, str):
+                    value = datetime.datetime.fromisoformat(value)
+                setattr(ins, key, value)
+        else:
+            ins = cls()
+        return ins
+
