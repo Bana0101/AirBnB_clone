@@ -2,6 +2,7 @@
 """ a basemodel class """
 
 from datetime import datetime
+from models import storage
 import uuid
 
 
@@ -10,9 +11,15 @@ class BaseModel:
 
     def save(self):
         self.updated_at = datetime.now()
+        storage.save()
 
     def __init__(self, *args, **kwargs):
-        if kwargs:
+        if not kwargs or '__class__' not in kwargs:
+            self.updated_at = datetime.now()
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+        else:
             for key, value in kwargs.items():
                 if key != '__class__':
                     if key in ['created_at', 'updated_at']:
@@ -20,11 +27,7 @@ class BaseModel:
                                 value, "%Y-%m-%dT%H:%M:%S.%f"
                                 )
                     setattr(self, key, value)
-            self.updated_at = datetime.now()
-        else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
