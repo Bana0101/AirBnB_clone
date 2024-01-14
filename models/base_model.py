@@ -28,14 +28,10 @@ class BaseModel:
         return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
 
     def to_dict(self):
-        dic = {}
+        dic = self.__dict__.copy()
         dic["__class__"] = self.__class__.__name__
-        for key, value in self.__dict__.items():
-            if (key in ["created_at", "updated_at"]
-                    and isinstance(value, datetime)):
-                dic[key] = value.isoformat()
-            else:
-                dic[key] = value
+        dic["created_at"] = self.created_at.isoformat()
+        dic["updated_at"] = self.updated_at.isoformat()
         return dic
 
     @classmethod
