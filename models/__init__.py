@@ -9,6 +9,7 @@ import uuid
 storage = FileStorage()
 
 storage.reload()
+storage.save()
 
 #def __init__(self, *args, **kwargs):
 #    self.id = str(uuid.uuid4())

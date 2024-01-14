@@ -9,9 +9,6 @@ import uuid
 class BaseModel:
     """ the basemodel class """
 
-    def save(self):
-        self.updated_at = datetime.now()
-        storage.save()
 
     def __init__(self, *args, **kwargs):
         if not kwargs or '__class__' not in kwargs:
@@ -28,6 +25,10 @@ class BaseModel:
                                 )
                     setattr(self, key, value)
             storage.new(self)
+
+    def save(self):
+        self.updated_at = datetime.now()
+        storage.save()
 
     def __str__(self):
         return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
