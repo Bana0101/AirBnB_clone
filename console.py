@@ -24,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """Prints the string representation of an instance"""
-        args = arg.split()
+        args = arg.split(' ')
         if not args:
             print("** class name missing **")
             return
@@ -40,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """ deletes an instance based on the class name and id"""
-        args = arg.split()
+        args = arg.split(' ')
 
         if not args:
             print("** class name missing **")
@@ -57,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         """ update an instance based on the class name and id"""
-        args = arg.split()
+        args = arg.split(' ')
 
         if not args:
             print("** class name missing **")

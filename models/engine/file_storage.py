@@ -2,7 +2,7 @@
 """ module documentation"""
 import json
 from os import path
-# from models.base_model import BaseModel
+#from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -10,6 +10,7 @@ class FileStorage:
 
     __file_path = "file.json"
     __objects = {}
+#   classes = {"BaseModel": BaseModel, "User": User}
 
     def all(self):
         return self.__objects
