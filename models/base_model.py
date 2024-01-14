@@ -9,7 +9,6 @@ import uuid
 class BaseModel:
     """ the basemodel class """
 
-
     def __init__(self, *args, **kwargs):
         if not kwargs or '__class__' not in kwargs:
             self.updated_at = datetime.now()
