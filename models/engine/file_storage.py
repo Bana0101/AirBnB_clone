@@ -20,16 +20,12 @@ class FileStorage:
         self.__objects[key] = obj
 
     def save(self, obj):
-        if os.path.isfile(self.__file_path):
-            self.new(obj)
-            srl_objs = {}
-            for key, obj in self.__objects.items():
-                srl_objs[key] = obj.to_dict()
-            print("cho")
-            print(self)
-            print("end")
-            with open(self.__file_path, 'w') as file:
-                json.dump(srl_objs, file)
+        self.new(obj)
+        srl_objs = {}
+        for key, obj in self.__objects.items():
+            srl_objs[key] = obj.to_dict()
+        with open(self.__file_path, 'w') as file:
+            json.dump(srl_objs, file)
 
     def reload(self):
         if path.isfile(self.__file_path):
@@ -37,6 +33,9 @@ class FileStorage:
                 data = json.load(file)
             for key, objt in data.items():
                 class_name, obj_id = key.split('.')
-                clas = globals()[class_name]
-                obj = clas(**objt)
-                self.__objects[key] = obj
+                clas = globals().get(class_name)
+                if clas:
+                    obj = clas(**objt)
+                    self.__objects[key] = obj
+                else:
+                    print(f"Class {class_name} not found.")
