@@ -19,10 +19,14 @@ class FileStorage:
         key = f"{obj.__class__.__name__}.{obj.id}"
         self.__objects[key] = obj
 
-    def save(self):
+    def save(self, obj):
+        self.new(obj)
         srl_objs = {}
         for key, obj in self.__objects.items():
             srl_objs[key] = obj.to_dict()
+        print("cho")
+        print(self)
+        print("end")
         with open(self.__file_path, 'w') as file:
             json.dump(srl_objs, file)
 

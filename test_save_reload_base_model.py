@@ -7,6 +7,7 @@ print("-- Reloaded objects --")
 for obj_id in all_objs.keys():
     obj = all_objs[obj_id]
     print(obj)
+print("obj reloaded")
 
 print("-- Create a new object --")
 my_model = BaseModel()
