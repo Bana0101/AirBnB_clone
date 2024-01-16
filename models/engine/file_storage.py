@@ -28,14 +28,11 @@ class FileStorage:
             json.dump(srl_objs, file)
 
     def reload(self):
-        if path.isfile(self.__file_path):
-            with open(self.__file_path, 'r') as file:
-                data = json.load(file)
-            for key, objt in data.items():
-                class_name, obj_id = key.split('.')
-                clas = globals().get(class_name)
-                if clas:
+            if path.isfile(self.__file_path):
+                with open(self.__file_path, 'r') as file:
+                    data = json.load(file)
+                for key, objt in data.items():
+                    class_name, obj_id = key.split('.')
+                    clas = globals()[class_name]
                     obj = clas(**objt)
                     self.__objects[key] = obj
-                else:
-                    print(f"Class {class_name} not found.")
