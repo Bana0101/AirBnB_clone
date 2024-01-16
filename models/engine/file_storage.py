@@ -24,12 +24,6 @@ class FileStorage:
         srl_objs = {}
         for key, obj in self.__objects.items():
             srl_objs[key] = obj.to_dict()
-<<<<<<< HEAD
-=======
-        print("cho")
-        print(self)
-        print("end")
->>>>>>> parent of c57098c (finally fixed json file problem)
         with open(self.__file_path, 'w') as file:
             json.dump(srl_objs, file)
 
