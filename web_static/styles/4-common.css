@@ -1,0 +1,22 @@
+body {
+        display: flex;
+        flex-direction: column;
+        margin: 0px;
+        padding: 0px;
+        min-height: 100vh;
+	color: #484848;
+	font-size: 14px;
+	font-family: 'Circular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+main {
+        flex: 1;
+	display: flex;
+	width: 100%;
+	justify-content: center;
+}
+.container {
+	width: 1000px; /* khass nder hna max-width wlkin ma3rftch lach makatkhdemch */
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
