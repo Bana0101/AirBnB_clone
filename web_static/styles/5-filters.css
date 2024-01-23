@@ -32,7 +32,7 @@ button:hover {
 }
 .amenities {
 	padding: 0px;
-	margin-left: 20px; /* zdto mn rasi 7it ja las9 fjenb */
+	margin-left: 20px;
 	height: 100%;
 	width: 25%;
 }
@@ -40,7 +40,7 @@ button:hover {
     flex: 1; /* Takes up remaining space */
 }
 h3 {
-	padding-top: 13px; tify content ms makatkhdemch */
+	padding-top: 13px; 
 	margin: 0px;
 	font-weight: 600;
 }
